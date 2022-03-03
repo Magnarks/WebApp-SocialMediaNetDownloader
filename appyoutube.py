@@ -42,7 +42,7 @@ def inicio():
                 mensaje="Audio Descargado"
                 archivo=video.download(descarga_carpeta)
                 archivo1=archivo.split("/app/")[-1]
-                archivo2="A"+archivo1
+                archivo2=archivo1
                 return redirect("/"+sitio2)
             elif calidad=="alta":
                 video= video.streams.get_highest_resolution()
