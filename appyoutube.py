@@ -96,8 +96,8 @@ def inicio2():
                         if file.endswith(".mp4"):
                             archivorar.write(os.path.join(folder, file), os.path.relpath(os.path.join(folder, file), carpeta_zip), compress_type=zipfile.ZIP_DEFLATED)
                             archivorarDL=archivorar.filename
-                            archivorarDL2=archivorarDL.split("\Ar")[-1]
-                            archivorarDL3="Ar"+archivorarDL2
+                            archivorarDL2=archivorarDL.split("/app/")[-1]
+                            archivorarDL3=archivorarDL2
                 archivorar.close()
                 for folder, subfolders, files in os.walk(carpeta_zip):
                     for file in files:
