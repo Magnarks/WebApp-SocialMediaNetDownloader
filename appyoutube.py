@@ -49,21 +49,21 @@ def inicio():
                 mensaje= "Video Descargado"
                 archivo=video.download(descarga_carpeta)
                 archivo1=archivo.split("\A")[-1]
-                archivo2="A"+archivo1
+                archivo2=archivo1
                 return redirect("/"+sitio2)
             elif calidad=="baja":
                 video= video.streams.get_lowest_resolution()
                 mensaje= "Video Descargado"
                 archivo=video.download(descarga_carpeta)
                 archivo1=archivo.split("\A")[-1]
-                archivo2="A"+archivo1
+                archivo2=archivo1
                 return redirect("/"+sitio2)
             else:
                 video= video.streams.get_by_resolution(calidad)
                 mensaje= "Video Descargado"
                 archivo=video.download(descarga_carpeta)
                 archivo1=archivo.split("\A")[-1]
-                archivo2="A"+archivo1
+                archivo2=archivo1
                 return redirect("/"+sitio2)
         else:
             mensaje= "El campo esta vacio o no has seleccionado una calidad de video"
