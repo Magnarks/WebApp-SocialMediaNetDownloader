@@ -41,8 +41,8 @@ def inicio():
                 video=video.streams.get_audio_only()
                 mensaje="Audio Descargado"
                 archivo=video.download(descarga_carpeta)
-                archivo1=archivo.split("\A")[-1]
-                archivo2=archivo
+                archivo1=archivo.split("/app/")[-1]
+                archivo2="A"+archivo1
                 return redirect("/"+sitio2)
             elif calidad=="alta":
                 video= video.streams.get_highest_resolution()
