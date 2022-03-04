@@ -8,6 +8,9 @@ body{
     url(../Imagenes/design-tools.jpg);
     background-blend-mode: multiply;
 }
+h1{
+    color: #fff;
+}
 @keyframes animacionBgColor{
     0%{
         filter: hue-rotate(0deg);
