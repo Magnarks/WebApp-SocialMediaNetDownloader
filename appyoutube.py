@@ -32,7 +32,10 @@ def inicio():
     global enlace
     if request.method=="POST":
         sitio1=request.form["link"]
-        sitio2=sitio1.split("=")[-1]
+        if sitio1.startswith("https://youtu.be/"):
+            sitio2=sitio1.split("/")[-1]
+        else:
+            sitio2=sitio1.split("=")[-1]
         enlace=request.form["link"]
         if enlace!="":
             video= YouTube(enlace)
