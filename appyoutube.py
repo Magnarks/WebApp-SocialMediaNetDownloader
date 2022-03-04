@@ -183,8 +183,12 @@ def inicio3():
     global archivozipDL3
     if request.method=="POST":
         sitio1= request.form["link"]
-        sitio4= sitio1.split("/")
-        sitio4_1= sitio4[4]
+        if sitio1.startswith("https://youtube.com/user/") or sitio1.startswith("https://youtube.com/c/"):
+            sitio4= sitio1.split("/")[-1]
+        else:
+            sitio4= sitio1.split("/")
+            sitio4_1= sitio4[4]
+            sitio4= sitio4_1
         enlace3=request.form["link"]
         if enlace3!="":
             Canal= Channel(enlace3)
@@ -209,7 +213,7 @@ def inicio3():
                     for file in files:
                         if file.endswith(".mp4"):
                             os.remove(folder+"/"+file)
-                return redirect("/channel"+sitio4_1)
+                return redirect("/channel"+sitio4)
             elif calidad=="alta":
                 for video in Canal.videos:
                     video.streams.get_highest_resolution().download(channel_carpeta)
@@ -230,7 +234,7 @@ def inicio3():
                     for file in files:
                         if file.endswith(".mp4"):
                             os.remove(folder+"/"+file)
-                return redirect("/channel"+sitio4_1)
+                return redirect("/channel"+sitio4)
             elif calidad=="baja":
                 for video in Canal.videos:
                     video.streams.get_lowest_resolution().download(channel_carpeta)
@@ -251,7 +255,7 @@ def inicio3():
                     for file in files:
                         if file.endswith(".mp4"):
                             os.remove(folder+"/"+file)
-                return redirect("/channel"+sitio4_1)
+                return redirect("/channel"+sitio4)
             else:
                 for video in Canal.videos:
                     video.streams.get_by_resolution(calidad).download(channel_carpeta)
@@ -272,7 +276,7 @@ def inicio3():
                     for file in files:
                         if file.endswith(".mp4"):
                             os.remove(folder+"/"+file)
-                return redirect("/channel"+sitio4_1)
+                return redirect("/channel"+sitio4)
         else:
             mensaje= "El canal es incorrecto o el campo esta vacio"
             return render_template("Inicio3.html", message=mensaje)
