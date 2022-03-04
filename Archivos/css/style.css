@@ -11,6 +11,9 @@ body{
 h1{
     color: #fff;
 }
+p{
+    color:#fff;
+}
 @keyframes animacionBgColor{
     0%{
         filter: hue-rotate(0deg);
