@@ -56,6 +56,9 @@
         <input type="radio" id="res" name="res" value="360p">360p
         <br>
       </div>
+      <div class="container">
+        <h3>{{ message }}</h3>
+      </div>
       {% block body %}
       {% endblock %}
     </form>
@@ -73,9 +76,6 @@
         });
       </script>
     </section>
-    <div class="alert">
-      <h3>{{ message }}</h3>
-    </div>
   </section>
 </body>
 <footer>
