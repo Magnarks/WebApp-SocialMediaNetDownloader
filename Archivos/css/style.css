@@ -197,6 +197,9 @@ section form label, section form input, section form button, section form a, sec
     color: #525252;
 }
 footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     background: linear-gradient(90deg, #525252 0%, #ff0000 100%);
     padding: 1rem;
     animation: animacionBgColor 5s linear infinite;
