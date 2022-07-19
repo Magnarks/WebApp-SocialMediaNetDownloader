@@ -1,5 +1,6 @@
 from flask import Flask, redirect, render_template, request
 from pytube import YouTube, Playlist, Channel
+from moviepy.editor import VideoFileClip
 import os
 import zipfile
 appyoutube= Flask(__name__, template_folder="Plantillas", static_folder="Archivos")
@@ -7,7 +8,9 @@ base=os.getcwd()
 descarga_carpeta=os.path.join(base, "Archivos", "Descargas")
 carpeta_zip=os.path.join(base, "Archivos", "Descargas", "Playlist")
 channel_carpeta=os.path.join(base, "Archivos", "Descargas", "Channels")
+gif_carpeta=os.path.join(base, "Archivos", "Descargas", "Gifs")
 archivo2=""
+archivo4=""
 archivos2=""
 archivorarDL3=""
 
@@ -283,6 +286,63 @@ def inicio3():
     else:
         return render_template("Inicio3.html")
 
+@appyoutube.route("/gif", methods=["GET", "POST"])
+def inicio4():
+    global archivo2
+    global archivo4
+    global enlace
+    if request.method=="POST":
+        sitio1=request.form["link"]
+        if sitio1.startswith("https://youtu.be/"):
+            sitio5=sitio1.split("/")[-1]
+        else:
+            sitio5=sitio1.split("=")[-1]
+        enlace=request.form["link"]
+        if enlace!="":
+            video= YouTube(enlace)
+            calidad=request.form["res"]
+            if calidad=="audio":
+                video=video.streams.get_audio_only()
+                mensaje="Audio Descargado"
+                archivo=video.download(gif_carpeta)
+                archivo1=archivo.split("/app/")[-1]
+                archivo2=archivo1
+                archivo3= VideoFileClip(archivo2)
+                archivo4= archivo3.write_gif("VideoConvertido.gif")
+                return redirect("/gif"+sitio5)
+            elif calidad=="alta":
+                video= video.streams.get_highest_resolution()
+                mensaje= "Video Descargado"
+                archivo=video.download(gif_carpeta)
+                archivo1=archivo.split("/app/")[-1]
+                archivo2=archivo1
+                archivo3= VideoFileClip(archivo2)
+                archivo4= archivo3.write_gif("VideoConvertido.gif")
+                return redirect("/gif"+sitio5)
+            elif calidad=="baja":
+                video= video.streams.get_lowest_resolution()
+                mensaje= "Video Descargado"
+                archivo=video.download(gif_carpeta)
+                archivo1=archivo.split("/app/")[-1]
+                archivo2=archivo1
+                archivo3= VideoFileClip(archivo2)
+                archivo4= archivo3.write_gif("VideoConvertido.gif")
+                return redirect("/gif"+sitio5)
+            else:
+                video= video.streams.get_by_resolution(calidad)
+                mensaje= "Video Descargado"
+                archivo=video.download(gif_carpeta)
+                archivo1=archivo.split("/app/")[-1]
+                archivo2=archivo1
+                archivo3= VideoFileClip(archivo2)
+                archivo4= archivo3.write_gif("VideoConvertido.gif")
+                return redirect("/gif"+sitio5)
+        else:
+            mensaje= "El campo esta vacio o no has seleccionado una calidad de video"
+            return render_template("Inicio4.html", message=mensaje)
+    else:
+        return render_template("Inicio4.html")
+
 @appyoutube.route("/<sitio2>", methods=["GET", "POST"])
 def Descarga(sitio2=None):
     if request.method == "POST":
@@ -306,6 +366,14 @@ def Descarga3(sitio4=None):
         return redirect("/channel")
     else:
         return render_template("Youtube3.html", imagen=miniatura, archivozip=archivozipDL3)
+
+@appyoutube.route("/gif<sitio5>", methods=["GET", "POST"])
+def Descarga4(sitio5=None):
+    if request.method == "POST":
+        volver=request.form
+        return redirect("/gif")
+    else:
+        return render_template("Gif.html", imagen=miniatura, archivogif=archivo4)
 
 if __name__ == "__main__":
     appyoutube.run(debug=False)
