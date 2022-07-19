@@ -308,7 +308,7 @@ def inicio4():
                 archivo1=archivo.split("/app/")[-1]
                 archivo2=archivo1
                 archivo3= VideoFileClip(archivo2)
-                archivo4= archivo3.write_gif("VideoConvertido.gif")
+                archivo4= archivo3.write_gif(gif_carpeta+archivo+".gif")
                 return redirect("/gif"+sitio5)
             elif calidad=="alta":
                 video= video.streams.get_highest_resolution()
@@ -317,7 +317,7 @@ def inicio4():
                 archivo1=archivo.split("/app/")[-1]
                 archivo2=archivo1
                 archivo3= VideoFileClip(archivo2)
-                archivo4= archivo3.write_gif("VideoConvertido.gif")
+                archivo4= archivo3.write_gif(gif_carpeta+archivo+".gif")
                 return redirect("/gif"+sitio5)
             elif calidad=="baja":
                 video= video.streams.get_lowest_resolution()
@@ -326,7 +326,7 @@ def inicio4():
                 archivo1=archivo.split("/app/")[-1]
                 archivo2=archivo1
                 archivo3= VideoFileClip(archivo2)
-                archivo4= archivo3.write_gif("VideoConvertido.gif")
+                archivo4= archivo3.write_gif(gif_carpeta+archivo+".gif")
                 return redirect("/gif"+sitio5)
             else:
                 video= video.streams.get_by_resolution(calidad)
@@ -335,7 +335,7 @@ def inicio4():
                 archivo1=archivo.split("/app/")[-1]
                 archivo2=archivo1
                 archivo3= VideoFileClip(archivo2)
-                archivo4= archivo3.write_gif("VideoConvertido.gif")
+                archivo4= archivo3.write_gif(gif_carpeta+archivo+".gif")
                 return redirect("/gif"+sitio5)
         else:
             mensaje= "El campo esta vacio o no has seleccionado una calidad de video"
@@ -373,7 +373,7 @@ def Descarga4(sitio5=None):
         volver=request.form
         return redirect("/gif")
     else:
-        return render_template("Gif.html", imagen=miniatura, archivogif=archivo4)
+        return render_template("Gif.html", imagengif=archivo4, archivogif=archivo4)
 
 if __name__ == "__main__":
     appyoutube.run(debug=False)
