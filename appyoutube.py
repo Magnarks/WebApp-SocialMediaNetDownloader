@@ -327,7 +327,7 @@ def inicio4():
                 print(archivo)
                 archivo1=archivo.split("/app/")[-1]
                 archivo2=archivo1
-                archivo3= VideoFileClip(video)
+                archivo3= VideoFileClip(archivo)
                 archivo4= archivo3.write_gif("VideoDownload.gif")
                 return redirect("/gif"+sitio5)
             else:
