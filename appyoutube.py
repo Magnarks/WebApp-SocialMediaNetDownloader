@@ -321,14 +321,13 @@ def inicio4():
                 return redirect("/gif"+sitio5)
             elif calidad=="baja":
                 video= video.streams.get_lowest_resolution()
+                print(video)
                 mensaje= "Video Descargado"
                 archivo=video.download(gif_carpeta)
+                print(archivo)
                 archivo1=archivo.split("/app/")[-1]
                 archivo2=archivo1
-                print(archivo2)
-                archivo3= VideoFileClip(archivo2)
-                carpetaD = gif_carpeta.split("/app/")[-1]
-                print(carpetaD)
+                archivo3= VideoFileClip(video)
                 archivo4= archivo3.write_gif("VideoDownload.gif")
                 return redirect("/gif"+sitio5)
             else:
