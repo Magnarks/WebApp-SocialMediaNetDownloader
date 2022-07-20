@@ -11,6 +11,7 @@ channel_carpeta=os.path.join(base, "Archivos", "Descargas", "Channels")
 gif_carpeta=os.path.join(base, "Archivos", "Descargas", "Gifs")
 archivo2=""
 archivo4=""
+archivo6=""
 archivos2=""
 archivorarDL3=""
 
@@ -290,6 +291,7 @@ def inicio3():
 def inicio4():
     global archivo2
     global archivo4
+    global archivo6
     global enlace
     if request.method=="POST":
         sitio1=request.form["link"]
@@ -376,7 +378,7 @@ def Descarga4(sitio5=None):
         volver=request.form
         return redirect("/gif")
     else:
-        return render_template("Gif.html", imagengif=archivo4, archivogif=archivo4)
+        return render_template("Gif.html", imagengif=archivo6, archivogif=archivo6)
 
 if __name__ == "__main__":
     appyoutube.run(debug=False)
