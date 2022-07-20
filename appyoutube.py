@@ -325,8 +325,11 @@ def inicio4():
                 archivo=video.download(gif_carpeta)
                 archivo1=archivo.split("/app/")[-1]
                 archivo2=archivo1
+                print(archivo2)
                 archivo3= VideoFileClip(archivo2)
-                archivo4= archivo3.write_gif(gif_carpeta+"/"+"VideoDownload.gif")
+                carpetaD = gif_carpeta.split("/app/")[-1]
+                print(carpetaD)
+                archivo4= archivo3.write_gif(carpetaD+"/"+"VideoDownload.gif")
                 return redirect("/gif"+sitio5)
             else:
                 video= video.streams.get_by_resolution(calidad)
