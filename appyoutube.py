@@ -308,7 +308,7 @@ def inicio4():
                 archivo1=archivo.split("/app/")[-1]
                 archivo2=archivo1
                 archivo3= VideoFileClip(archivo2)
-                archivo4= archivo3.write_gif(gif_carpeta+"VideoDownload.gif")
+                archivo4= archivo3.write_gif(gif_carpeta+"/"+"VideoDownload.gif")
                 return redirect("/gif"+sitio5)
             elif calidad=="alta":
                 video= video.streams.get_highest_resolution()
@@ -317,7 +317,7 @@ def inicio4():
                 archivo1=archivo.split("/app/")[-1]
                 archivo2=archivo1
                 archivo3= VideoFileClip(archivo2)
-                archivo4= archivo3.write_gif(gif_carpeta+"VideoDownload.gif")
+                archivo4= archivo3.write_gif(gif_carpeta+"/"+"VideoDownload.gif")
                 return redirect("/gif"+sitio5)
             elif calidad=="baja":
                 video= video.streams.get_lowest_resolution()
@@ -326,7 +326,7 @@ def inicio4():
                 archivo1=archivo.split("/app/")[-1]
                 archivo2=archivo1
                 archivo3= VideoFileClip(archivo2)
-                archivo4= archivo3.write_gif(gif_carpeta+"VideoDownload.gif")
+                archivo4= archivo3.write_gif(gif_carpeta+"/"+"VideoDownload.gif")
                 return redirect("/gif"+sitio5)
             else:
                 video= video.streams.get_by_resolution(calidad)
@@ -335,7 +335,7 @@ def inicio4():
                 archivo1=archivo.split("/app/")[-1]
                 archivo2=archivo1
                 archivo3= VideoFileClip(archivo2)
-                archivo4= archivo3.write_gif(gif_carpeta+"VideoDownload.gif")
+                archivo4= archivo3.write_gif(gif_carpeta+"/"+"VideoDownload.gif")
                 return redirect("/gif"+sitio5)
         else:
             mensaje= "El campo esta vacio o no has seleccionado una calidad de video"
