@@ -1,0 +1,15 @@
+{% extends "Inicio2.html" %}
+{% block body %}
+    <form method="POST">
+        <div class="form-group">
+            <img id="img" width="330" height="220" src="{{ archivosimg }}">
+            <br>
+            <a class="fcc-btn" href="{{ archivorar }}" download="">Descargar</a>
+            <button type="submit">Volver</button>
+        </div>
+    </form>
+    <br>
+    <div class="alert">
+        <h3>{{ message }}</h3>
+    </div>
+{% endblock %}

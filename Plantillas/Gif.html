@@ -1,0 +1,15 @@
+{% extends "Inicio4.html" %}
+{% block body %}
+    <form method="POST">
+        <div class="form-group">
+            <img src="{{ imagengif }}" alt="Gif">
+            <br>
+            <a class="fcc-btn" href="{{ archivogif }}" download="">Descargar</a>
+            <button type="submit">Volver</button>
+        </div>
+    </form>
+    <br>
+    <div class="alert">
+        <h3>{{ message }}</h3>
+    </div>
+{% endblock %}
