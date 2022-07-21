@@ -9,7 +9,10 @@ descarga_carpeta=os.path.join(base, "Archivos", "Descargas")
 carpeta_zip=os.path.join(base, "Archivos", "Descargas", "Playlist")
 channel_carpeta=os.path.join(base, "Archivos", "Descargas", "Channels")
 gif_carpeta=os.path.join(base, "Archivos", "Descargas", "Gifs")
-
+archivo2=""
+archivo4=""
+archivos2=""
+archivorarDL3=""
 
 @appyoutube.errorhandler(404)
 def error404(error):
