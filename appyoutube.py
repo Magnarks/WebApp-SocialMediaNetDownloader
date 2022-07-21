@@ -343,17 +343,29 @@ def inicio4():
     else:
         return render_template("Inicio4.html")
 
-@appyoutube.route("/twdownloader")
+@appyoutube.route("/twdownloader", methods=["GET", "POST"])
 def inicioTW():
-    return render_template("inicioTW.html")
+    if request.method == "POST":
+        volver=request.form
+        return redirect("/twdownloader")
+    else:
+        return render_template("InicioTW.html")
 
-@appyoutube.route("/igdownloader")
+@appyoutube.route("/igdownloader", methods=["GET", "POST"])
 def inicioIG():
-    return render_template("inicioIG.html")
+    if request.method == "POST":
+        volver=request.form
+        return redirect("/igdownloader")
+    else:
+        return render_template("InicioIG.html")
 
-@appyoutube.route("/fbdownloader")
+@appyoutube.route("/fbdownloader", methods=["GET", "POST"])
 def inicioFB():
-    return render_template("inicioFB.html")
+    if request.method == "POST":
+        volver=request.form
+        return redirect("/fbdownloader")
+    else:
+        return render_template("InicioFB.html")
 
 @appyoutube.route("/<sitio2>", methods=["GET", "POST"])
 def Descarga(sitio2=None):
