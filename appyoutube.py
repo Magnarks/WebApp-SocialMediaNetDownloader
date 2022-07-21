@@ -378,7 +378,7 @@ def Descarga4(sitio5=None):
         volver=request.form
         return redirect("/gif")
     else:
-        return render_template("Gif.html", imagengif=archivo6, archivogif=archivo6)
+        return render_template("Gif.html", imagengif=archivo2, archivogif=archivo2)
 
 if __name__ == "__main__":
     appyoutube.run(debug=False)
