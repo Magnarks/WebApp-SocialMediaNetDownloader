@@ -11,7 +11,6 @@ channel_carpeta=os.path.join(base, "Archivos", "Descargas", "Channels")
 gif_carpeta=os.path.join(base, "Archivos", "Descargas", "Gifs")
 archivo2=""
 archivo4=""
-archivo6=""
 archivos2=""
 archivorarDL3=""
 
@@ -32,6 +31,7 @@ def error500(error):
 
 @appyoutube.route("/", methods=["GET", "POST"])
 def inicio():
+    global archivo
     global archivo2
     global enlace
     if request.method=="POST":
@@ -291,17 +291,16 @@ def inicio3():
 def inicio4():
     global archivo2
     global archivo4
-    global archivo6
-    global enlace
+    global enlace4
     if request.method=="POST":
         sitio1=request.form["link"]
         if sitio1.startswith("https://youtu.be/"):
             sitio5=sitio1.split("/")[-1]
         else:
             sitio5=sitio1.split("=")[-1]
-        enlace=request.form["link"]
-        if enlace!="":
-            video= YouTube(enlace)
+        enlace4=request.form["link"]
+        if enlace4!="":
+            video= YouTube(enlace4)
             calidad=request.form["res"]
             if calidad=="audio":
                 video=video.streams.get_audio_only()
@@ -327,9 +326,6 @@ def inicio4():
                 archivo=video.download(gif_carpeta)
                 archivo1=archivo.split("/app/")[-1]
                 archivo2=archivo1
-                archivo5= gif_carpeta.split("/app/")[-1]
-                archivo6=archivo5+"/VideoDownload.gif"
-                print(archivo6)
                 archivo3= VideoFileClip(archivo2)
                 archivo4= archivo3.write_gif(gif_carpeta+"/"+"VideoDownload.gif")
                 return redirect("/gif"+sitio5)
@@ -354,7 +350,7 @@ def Descarga(sitio2=None):
         volver=request.form
         return redirect("/")
     else:
-        return render_template("Youtube.html", archivo3=archivo2)
+        return render_template("Youtube.html", archivo3=archivo)
 
 @appyoutube.route("/playlist<sitio3>", methods=["GET", "POST"])
 def Descarga2(sitio3=None):
@@ -378,7 +374,7 @@ def Descarga4(sitio5=None):
         volver=request.form
         return redirect("/gif")
     else:
-        return render_template("Gif.html", imagengif=archivo2, archivogif=archivo2)
+        return render_template("Gif.html", imagengif=archivo4, archivogif=archivo4)
 
 if __name__ == "__main__":
     appyoutube.run(debug=False)
