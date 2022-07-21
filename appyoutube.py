@@ -343,15 +343,15 @@ def inicio4():
     else:
         return render_template("Inicio4.html")
 
-@appyoutube.route("/twdownloader", methods=["GET", "POST"])
+@appyoutube.route("/twdownloader")
 def inicioTW():
     return render_template("inicioTW.html")
 
-@appyoutube.route("/igdownloader", methods=["GET", "POST"])
+@appyoutube.route("/igdownloader")
 def inicioIG():
     return render_template("inicioIG.html")
 
-@appyoutube.route("/fbdownloader", methods=["GET", "POST"])
+@appyoutube.route("/fbdownloader")
 def inicioFB():
     return render_template("inicioFB.html")
 
