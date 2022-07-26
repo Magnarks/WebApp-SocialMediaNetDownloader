@@ -306,8 +306,11 @@ def inicio3():
 
 @appyoutube.route("/gif", methods=["GET", "POST"])
 def process():
-    inicio4()
-    return "Esto es una prueba"
+    if request.method=="POST":
+        inicio4()
+    else:
+        return render_template("Inicio4.html")
+    return render_template("Inicio4.html")
 @celery.task()
 def inicio4():
     global archivo2
