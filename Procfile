@@ -1,1 +1,1 @@
-web: gunicorn appyoutube:appyoutube
+web: gunicorn appyoutube:appyoutube --timeout 10
