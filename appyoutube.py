@@ -1,9 +1,14 @@
 from flask import Flask, redirect, render_template, request
+from celery import Celery
 from pytube import YouTube, Playlist, Channel
 from moviepy.editor import VideoFileClip
 import os
 import zipfile
 appyoutube= Flask(__name__, template_folder="Plantillas", static_folder="Archivos")
+appyoutube.config.update(CELERY_CONFIG={
+    "broker_url" : "redis://localhost:6379",
+    "result_backend": "redis//localhost:6379",
+})
 base=os.getcwd()
 descarga_carpeta=os.path.join(base, "Archivos", "Descargas")
 carpeta_zip=os.path.join(base, "Archivos", "Descargas", "Playlist")
@@ -13,6 +18,19 @@ archivo2=""
 archivo4=""
 archivos2=""
 archivorarDL3=""
+
+def make_celery(app):
+    celery= Celery(app.import_name)
+    celery.conf.update(app.config["CELERY_CONFIG"])
+
+    class ContextTask(celery.Task):
+        def __call__(self, *args, **kwargs):
+            with app.app_context():
+                return self.run(*args, **kwargs)
+    celery.Task = ContextTask
+    return celery
+
+celery= make_celery(appyoutube)
 
 @appyoutube.errorhandler(404)
 def error404(error):
@@ -287,6 +305,10 @@ def inicio3():
         return render_template("Inicio3.html")
 
 @appyoutube.route("/gif", methods=["GET", "POST"])
+def process():
+    inicio4()
+    return "Esto es una prueba"
+@celery.task()
 def inicio4():
     global archivo2
     global archivo4
