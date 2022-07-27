@@ -1,14 +1,9 @@
 from flask import Flask, redirect, render_template, request
-from celery import Celery
 from pytube import YouTube, Playlist, Channel
 from moviepy.editor import VideoFileClip
 import os
 import zipfile
 appyoutube= Flask(__name__, template_folder="Plantillas", static_folder="Archivos")
-appyoutube.config.update(CELERY_CONFIG={
-    'broker_url': 'redis://localhost:6379',
-    'result_backend': 'redis://localhost:6379',
-})
 base=os.getcwd()
 descarga_carpeta=os.path.join(base, "Archivos", "Descargas")
 carpeta_zip=os.path.join(base, "Archivos", "Descargas", "Playlist")
@@ -18,20 +13,6 @@ archivo2=""
 archivo4=""
 archivos2=""
 archivorarDL3=""
-
-def make_celery(app):
-    celery = Celery(app.import_name)
-    celery.conf.update(app.config["CELERY_CONFIG"])
-
-    class ContextTask(celery.Task):
-        def __call__(self, *args, **kwargs):
-            with app.app_context():
-                return self.run(*args, **kwargs)
-
-    celery.Task = ContextTask
-    return celery
-
-celery = make_celery(appyoutube)
 
 @appyoutube.errorhandler(404)
 def error404(error):
@@ -327,7 +308,6 @@ def inicio4():
                 archivo1=archivo.split("/app/")[-1]
                 archivo2=archivo1
                 archivo4 = GifConverter(archivo2)
-                archivo4.wait()
                 return redirect("/gif"+sitio5)
             elif calidad=="alta":
                 video= video.streams.get_highest_resolution()
@@ -336,7 +316,6 @@ def inicio4():
                 archivo1=archivo.split("/app/")[-1]
                 archivo2=archivo1
                 archivo4 = GifConverter(archivo2)
-                archivo4.wait()
                 return redirect("/gif"+sitio5)
             elif calidad=="baja":
                 video= video.streams.get_lowest_resolution()
@@ -345,7 +324,6 @@ def inicio4():
                 archivo1=archivo.split("/app/")[-1]
                 archivo2=archivo1
                 archivo4 = GifConverter(archivo2)
-                archivo4.wait()
                 return redirect("/gif"+sitio5)
             else:
                 video= video.streams.get_by_resolution(calidad)
@@ -353,7 +331,6 @@ def inicio4():
                 archivo=video.download(gif_carpeta)
                 archivo1=archivo.split("/app/")[-1]
                 archivo4 = GifConverter(archivo2)
-                archivo4.wait()
                 return redirect("/gif"+sitio5)
         else:
             mensaje= "El campo esta vacio o no has seleccionado una calidad de video"
@@ -361,7 +338,6 @@ def inicio4():
     else:
         return render_template("Inicio4.html")
 
-@celery.task
 def GifConverter(video):
     videoClip = VideoFileClip(video)
     videoClip2 = videoClip.write_gif("VideoGif.gif")
