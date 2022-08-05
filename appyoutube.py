@@ -1,5 +1,6 @@
 from flask import Flask, redirect, render_template, request
 from pytube import YouTube, Playlist, Channel
+from instalooter.looters import ProfileLooter
 from moviepy.editor import VideoFileClip
 import os
 import zipfile
@@ -369,7 +370,8 @@ def inicioIG2():
         userIG=request.form["busqueda2"]
         if (userIG != ""):
             user = userIG
-            os.system(f"instagram-scraper {user}")
+            looter = ProfileLooter(user)
+            looter.download('~/Pictures', media_count=1)
         return redirect("/igdownloader/user")
     else:
         return render_template("InicioIG2.html")
