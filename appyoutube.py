@@ -358,7 +358,7 @@ def inicioIG():
         linkIG=request.form["busqueda"]
         if (linkIG != ""):
             link = linkIG
-            os.system(f"instalooter post {link} ~/Pictures")
+            os.system(f"instalooter post {link} ~/{descargaIG_carpeta}")
         return redirect("/igdownloader")
     else:
         return render_template("InicioIG.html")
