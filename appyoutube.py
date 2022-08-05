@@ -6,6 +6,7 @@ import zipfile
 appyoutube= Flask(__name__, template_folder="Plantillas", static_folder="Archivos")
 base=os.getcwd()
 descarga_carpeta=os.path.join(base, "Archivos", "Descargas")
+descargaIG_carpeta=os.path.join(base, "Archivos", "DescargasIG")
 carpeta_zip=os.path.join(base, "Archivos", "Descargas", "Playlist")
 channel_carpeta=os.path.join(base, "Archivos", "Descargas", "Channels")
 gif_carpeta=os.path.join(base, "Archivos", "Descargas", "Gifs")
@@ -354,10 +355,24 @@ def inicioTW():
 @appyoutube.route("/igdownloader", methods=["GET", "POST"])
 def inicioIG():
     if request.method == "POST":
-        volver=request.form
+        linkIG=request.form["busqueda"]
+        if (linkIG != ""):
+            link = linkIG
+            os.system(f"instalooter post {link} ~/{descargaIG_carpeta}")
         return redirect("/igdownloader")
     else:
         return render_template("InicioIG.html")
+
+@appyoutube.route("/igdownloader/user", methods=["GET", "POST"])
+def inicioIG2():
+    if request.method == "POST":
+        userIG=request.form["busqueda2"]
+        if (userIG != ""):
+            user = userIG
+            os.system(f"instagram-scraper {user} -d {descargaIG_carpeta} -m 20")
+        return redirect("/igdownloader/user")
+    else:
+        return render_template("InicioIG2.html")
 
 @appyoutube.route("/fbdownloader", methods=["GET", "POST"])
 def inicioFB():
