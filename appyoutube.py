@@ -358,7 +358,7 @@ def inicioIG():
         linkIG=request.form["busqueda"]
         if (linkIG != ""):
             link = linkIG
-            os.system(f"instalooter post {link} ~/{descargaIG_carpeta}")
+            os.system(f"instalooter post {link} ~/Pictures")
         return redirect("/igdownloader")
     else:
         return render_template("InicioIG.html")
@@ -369,7 +369,7 @@ def inicioIG2():
         userIG=request.form["busqueda2"]
         if (userIG != ""):
             user = userIG
-            os.system(f"instagram-scraper {user} -d {descargaIG_carpeta} -m 20")
+            os.system(f"instagram-scraper {user}")
         return redirect("/igdownloader/user")
     else:
         return render_template("InicioIG2.html")
